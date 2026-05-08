@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.remotion.dev)",
+      "WebFetch(domain:www.agentskills.io)",
+      "Bash(npx skills *)"
+    ]
+  }
+}

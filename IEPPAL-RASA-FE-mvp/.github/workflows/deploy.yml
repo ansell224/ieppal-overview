@@ -1,0 +1,47 @@
+name: Deploy FE
+
+on:
+  workflow_dispatch
+
+jobs:
+  deploy-to-s3:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      actions: read
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.IAM_ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ap-southeast-1
+          audience: sts.amazonaws.com
+
+      - name: Sync build output to S3
+        run: |
+          aws s3 sync ./build/ s3://${{ secrets.S3_BUCKET }}/ \
+            --delete
+
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION }}
+          PATHS: '/*'
+          AWS_REGION: ap-southeast-1

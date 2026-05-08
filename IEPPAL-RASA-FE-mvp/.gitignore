@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+.env
+build/
+.vscode/launch.json
+/dist/assets
+/dist
+IEPPAL-RASA-FE.code-workspace

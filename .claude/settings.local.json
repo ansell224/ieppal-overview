@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const p=require\\('./node_modules/@remotion/google-fonts/package.json'\\); const k=Object.keys\\(p.exports||{}\\); console.log\\(k.filter\\(x=>/inter|playfair/i.test\\(x\\)\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(npx skills *)"
+    ]
+  }
+}

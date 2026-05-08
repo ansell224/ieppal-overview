@@ -1,0 +1,52 @@
+{
+  "name": "IEPPAL",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@sgratzl/chartjs-chart-boxplot": "^4.4.5",
+    "@tiptap/extension-underline": "^3.22.3",
+    "@tiptap/pm": "^3.22.3",
+    "@tiptap/react": "^3.22.3",
+    "@tiptap/starter-kit": "^3.22.3",
+    "@xenova/transformers": "^2.17.2",
+    "autoprefixer": "^10.4.14",
+    "chart.js": "^4.5.1",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "date-fns": "^4.1.0",
+    "firebase": "^12.12.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.2",
+    "lucide-react": "^0.511.0",
+    "postcss": "^8.5.3",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-datepicker": "^8.4.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-router-dom": "^6.11.2",
+    "tailwindcss": "^3.3.2",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^6.2.2",
+    "vite-plugin-svgr": "^4.3.0"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "skills": {
+    "gsap": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "computedHash": "bf85f05f3c0146c18d6f6ff23e6a4cd4a7853462a6d637ea389b610f584d55f8"
+    },
+    "hyperframes": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "computedHash": "b4f2270106300188a8dcdba09616bd0a28fc563405c0979486f6d857250a3776"
+    },
+    "hyperframes-cli": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "computedHash": "728067b5e73d282bfba2f983b66912b3673c993bc384b080b97de51dbc931e6d"
+    },
+    "hyperframes-registry": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "computedHash": "187cb9060bc904c44e9a5f525ef2489b9750d398f7b82efd06568726db4fa2a4"
+    },
+    "remotion-best-practices": {
+      "source": "remotion-dev/skills",
+      "sourceType": "github",
+      "computedHash": "a6a79c92a109339759d7b465f2d45fe11ce955e307a3e2c03fbcf4f9b624b77a"
+    },
+    "website-to-hyperframes": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "computedHash": "13a2bd9fb57194fa0c0d6b220dbe724347de8a13ec204a966254594be40a954b"
+    }
+  }
+}

@@ -1,0 +1,287 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    /* Prevent rubber-band / bounce overscroll from exposing content above the
+       sticky sidebar at the top of the viewport. */
+    overscroll-behavior-y: none;
+  }
+
+  html {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .font-serif {
+    font-weight: 600;
+  }
+
+  /* Global interactive element transitions */
+  button, [role="button"], a, select, [onclick] {
+    transition: all 0.15s ease;
+  }
+
+
+  /* Subtle brightness on hover for buttons (exclude sidebar) */
+  button:not(:disabled):not([class*="opacity-"]):hover, [role="button"]:not(:disabled):hover {
+    filter: brightness(0.97);
+  }
+
+  .dark button:not(:disabled):not([class*="opacity-"]):hover, .dark [role="button"]:not(:disabled):hover {
+    filter: brightness(1.05);
+  }
+
+  /* Exclude sidebar buttons from brightness filter */
+  aside button:hover {
+    filter: none !important;
+  }
+
+  /* Smooth focus rings */
+  button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid rgb(236, 72, 153);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+
+  .dark .modal {
+    background: #262626;
+    color: #e5e5e5;
+  }
+  .dark .modal input {
+    background: #333;
+    border-color: #525252;
+    color: #e5e5e5;
+  }
+  .dark .modal-backdrop {
+    background: rgba(0,0,0,0.6);
+  }
+}
+
+/* Global card hover — lift + shadow on any clickable rounded card */
+/* card-hover must live outside @layer so it beats Tailwind specificity */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -6px rgba(0, 0, 0, 0.05) !important;
+  border-color: rgb(244, 114, 182) !important; /* pink-400 */
+}
+.dark .card-hover:hover {
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 10px -6px rgba(0, 0, 0, 0.2) !important;
+  border-color: rgb(190, 130, 180) !important;
+}
+
+/* Sidebar sub-items expand on hover */
+.group:hover .group-hover-sub-expand {
+  max-height: var(--sub-max-h, 10rem);
+}
+
+/* Additional global styles if needed */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+/* Fade-in for AI-generated results swapping in after loading */
+@keyframes aiFadeIn {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.ai-fade-in {
+  animation: aiFadeIn 400ms ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ai-fade-in { animation: none; }
+}
+  
+  .modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+}
+
+.modal input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.input-error {
+  border: 1px solid #e53935;
+}
+
+.error-text {
+  color: #e53935;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+/* IEPPAL Animated Logo */
+.ieppal-logo {
+  position: relative;
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: default;
+}
+
+.ieppal-logo .logo-border {
+  position: absolute;
+  background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(150,197,255,0.9), rgba(204,153,255,1), rgba(255,255,255,0.8));
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ieppal-logo .logo-border-top,
+.ieppal-logo .logo-border-bottom {
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform: scaleX(0);
+}
+
+.ieppal-logo .logo-border-top {
+  top: 0;
+  transform-origin: left;
+}
+
+.ieppal-logo .logo-border-bottom {
+  bottom: 0;
+  transform-origin: right;
+}
+
+.ieppal-logo .logo-border-left,
+.ieppal-logo .logo-border-right {
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: scaleY(0);
+}
+
+.ieppal-logo .logo-border-left {
+  left: 0;
+  transform-origin: top;
+}
+
+.ieppal-logo .logo-border-right {
+  right: 0;
+  transform-origin: bottom;
+}
+
+.ieppal-logo .logo-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(150,197,255,0.2) 0%, rgba(204,153,255,0.15) 40%, transparent 70%);
+  border-radius: 10px;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Active state — animate on hover */
+.ieppal-logo:hover .logo-border {
+  opacity: 1;
+  animation-fill-mode: forwards;
+}
+
+.ieppal-logo:hover .logo-border-top {
+  animation: logoBorderTop 0.4s ease-out forwards;
+}
+
+.ieppal-logo:hover .logo-border-right {
+  animation: logoBorderRight 0.4s ease-out 0.1s forwards;
+}
+
+.ieppal-logo:hover .logo-border-bottom {
+  animation: logoBorderBottom 0.4s ease-out 0.2s forwards;
+}
+
+.ieppal-logo:hover .logo-border-left {
+  animation: logoBorderLeft 0.4s ease-out 0.3s forwards;
+}
+
+.ieppal-logo:hover .logo-pulse {
+  animation: logoPulse 0.8s ease-out 0.1s forwards;
+}
+
+/* Auto-play animation on load */
+.ieppal-logo.animate-in .logo-border {
+  opacity: 1;
+  animation-fill-mode: forwards;
+}
+
+.ieppal-logo.animate-in .logo-border-top {
+  animation: logoBorderTop 0.5s ease-out 0.5s forwards;
+}
+
+.ieppal-logo.animate-in .logo-border-right {
+  animation: logoBorderRight 0.5s ease-out 0.7s forwards;
+}
+
+.ieppal-logo.animate-in .logo-border-bottom {
+  animation: logoBorderBottom 0.5s ease-out 0.9s forwards;
+}
+
+.ieppal-logo.animate-in .logo-border-left {
+  animation: logoBorderLeft 0.5s ease-out 1.1s forwards;
+}
+
+.ieppal-logo.animate-in .logo-pulse {
+  animation: logoPulse 1s ease-out 0.6s forwards;
+}
+
+@keyframes logoBorderTop {
+  0% { transform: scaleX(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes logoBorderRight {
+  0% { transform: scaleY(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes logoBorderBottom {
+  0% { transform: scaleX(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes logoBorderLeft {
+  0% { transform: scaleY(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes logoPulse {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
