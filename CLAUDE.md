@@ -29,6 +29,17 @@ The root of the combined IEP Pal working folder. Three sub-repositories live her
 
 ---
 
+## 🔄 Automatic git sync
+
+This repo auto-syncs with GitHub at session boundaries via Claude Code hooks (`.claude/settings.json` → `.claude/hooks/git-sync.sh`). No manual git needed:
+
+- **Session start** (`startup` / `resume`): `git pull --rebase --autostash` from `origin`.
+- **Session end** (any exit): if there are changes, scan them for secrets, then `git add -A`, commit with a timestamped `chore: auto-sync session ...` message, and `git push`.
+- **Secret guard:** the end hook greps changed files for key/token/password patterns (this is a *public* repo). If anything matches, it **aborts the commit/push** and logs a warning instead of leaking — fix the file, then it syncs next time.
+- Activity is logged to `.claude/hooks/last-sync.log` (gitignored). The hooks never block a session (always exit 0).
+
+---
+
 ## 🚀 Software dev session — trigger phrases & startup routine
 
 When the user says anything like:
